@@ -297,9 +297,9 @@ with left:
     labels = [feature_names[i].replace(" mean", "") for i in mean_idx]
 
     fig = go.Figure()
-    for trace_vals, trace_name, clr in [
-        (input_norm,   "Your Input",    "#3dd9c5"),
-        (dataset_norm, "Dataset Mean",  "#6a849e"),
+    for trace_vals, trace_name, clr, fill in [
+        (input_norm,   "Your Input",   "#3dd9c5", "rgba(61,217,197,0.08)"),
+        (dataset_norm, "Dataset Mean", "#6a849e", "rgba(106,132,158,0.06)"),
     ]:
         fig.add_trace(go.Scatterpolar(
             r=trace_vals + [trace_vals[0]],
@@ -307,7 +307,7 @@ with left:
             fill="toself",
             name=trace_name,
             line=dict(color=clr, width=2),
-            fillcolor=clr.replace("#", "rgba(") + ",0.08)" if clr != "#6a849e" else "rgba(106,132,158,0.06)",
+            fillcolor=fill,
         ))
     fig.update_layout(
         polar=dict(
